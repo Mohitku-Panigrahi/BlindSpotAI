@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      width: 100%; height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video id="vid" autoplay muted playsinline>
+    <source src="welcome_intro.mp4" type="video/mp4">
+  </video>
+
+  <script>
+    const vid = document.getElementById('vid');
+
+    // Redirect as soon as video ends
+    vid.addEventListener('ended', function () {
+      window.location.href = 'mediai-v3.html';
+    });
+
+    // Ensure autoplay works — play() returns a promise
+    vid.play().catch(function () {
+      // If still blocked (unlikely when muted), redirect anyway after 1s
+      setTimeout(function () {
+        window.location.href = 'mediai-v3.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
